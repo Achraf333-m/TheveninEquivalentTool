@@ -8,9 +8,9 @@
 #include "InputParser.h"
 
 // constructors
-TheveninEquivalent::TheveninEquivalent() : loadResistance(0.0), branchCurrent(0.0), TheveninVoltage(0.0), TheveninResistance(0.0), circuitCounter(0), ProblemNumber(0) {}
-TheveninEquivalent::TheveninEquivalent(double lr, double bc, double tv, double tr, int cc, int an) : loadResistance(lr), branchCurrent(bc), TheveninVoltage(tv), TheveninResistance(tr), circuitCounter(cc), ProblemNumber(an) {}
-TheveninEquivalent::TheveninEquivalent(const TheveninEquivalent &other) : loadResistance(other.loadResistance), branchCurrent(other.branchCurrent), TheveninVoltage(other.TheveninVoltage), TheveninResistance(other.TheveninResistance), circuitCounter(other.circuitCounter), ProblemNumber(other.ProblemNumber) {}
+TheveninEquivalent::TheveninEquivalent() : loadResistance(0.0), branchCurrent(0.0), TheveninVoltage(0.0), TheveninResistance(0.0), ProblemNumber(0) {}
+TheveninEquivalent::TheveninEquivalent(double lr, double bc, double tv, double tr, int cc, int an) : loadResistance(lr), branchCurrent(bc), TheveninVoltage(tv), TheveninResistance(tr), ProblemNumber(an) {}
+TheveninEquivalent::TheveninEquivalent(const TheveninEquivalent &other) : loadResistance(other.loadResistance), branchCurrent(other.branchCurrent), TheveninVoltage(other.TheveninVoltage), TheveninResistance(other.TheveninResistance), ProblemNumber(other.ProblemNumber) {}
 
 // setters
 void TheveninEquivalent::setProblemNumber()
@@ -35,10 +35,6 @@ double TheveninEquivalent::getTheveninVoltage() const
 double TheveninEquivalent::getTheveninResistance() const
 {
     return TheveninResistance;
-}
-int TheveninEquivalent::getInstanceCount() const
-{
-    return instanceCount;
 }
 int TheveninEquivalent::getProblemNumber() const
 {
@@ -176,21 +172,16 @@ void TheveninEquivalent::ShowEquivalentCircuit()
 
 void TheveninEquivalent::writeToFile()
 {
-    circuitCounter++;
     std::ofstream circuits("circuits.txt", std::ios::app);
 
     if (!circuits.is_open())
     {
         std::cerr << "Error opening file for writing! Please try again." << std::endl;
     }
-    if (circuitCounter == 1)
-    {
-        circuits << "Thevenin Circuits Log\n\n\n";
-    }
+
     double rating = (CalculatePowerSuppliedToLoad() / ((TheveninVoltage * TheveninVoltage) / (4 * TheveninResistance))) * 100;
     std::cout << std::fixed << std::setprecision(2);
     circuits << "\n\nProblem #" << ProblemNumber << "\n\n";
-    circuits << "********Circuit number " << circuitCounter << "********\n\n";
     circuits << "Thevenin Voltage: " << TheveninVoltage << " V.\n";
     circuits << "Thevenin Resistance: " << TheveninResistance << " Ohms.\n";
     circuits << "Load Resistance: " << loadResistance << " Ohms.\n";

@@ -9,7 +9,6 @@ private:
     double TheveninVoltage;
     double loadResistance;
     double branchCurrent;
-    int circuitCounter;
     int ProblemNumber;
     
 public:
@@ -26,7 +25,6 @@ public:
     double getBranchCurrent() const;
     double getTheveninVoltage() const;
     double getTheveninResistance() const;
-    int getInstanceCount() const;
     int getProblemNumber() const;
 
     // main methods
