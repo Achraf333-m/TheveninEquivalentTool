@@ -1,45 +1,13 @@
-   std::cout << "\n*****Thevenin Resistance*****" << std::endl;
-    std::cout << "\nIn your circuit:\n How many resistors are in series? \n";
-    std::cin >> SeriesResistorCount;
-    std::cout << "How many are in parallel?\n";
-    std::cin >> ParallelResistorCount;
+This is a starter project I created after completing my "Basic Circuit Analysis" course.
 
-    double userInput;
-    double parallelSum = 0;
-    double SeriesSum = 0;
+One of the most fascinating theorems I encountered was the Thevenin Equivalence. I found the ability to reduce complex circuits into simple, digestible "grade 1" equivalents genuinely mesmerizing.
 
-    // find the equivalent resistance for resistors in series
-    for (int i = 0; i < SeriesResistorCount; i++)
-    {
-        std::cout << "\nEnter the value of R-series-" << i + 1 << ": ";
-        std::cin >> userInput;
+It took me some time to fully grasp the theory, so I built this project both as a way to help other engineering newcomers visualize and interact with the concept — and as a "capstone" for what I've learned this past semester.
 
-        if (std::cin.fail())
-        {
-            std::cout << "Invalid value entered. Please enter a valid number.\n";
-            i--;
-        }
+This project reflects key topics from both circuit theory and programming, including:
 
-        std::cout << std::endl;
-        SeriesSum += userInput;
-    }
+- C++ programming methodology
+- Inheritance and operator overloading
+- File and exception handling
 
-    // find the equivalent resistance for resistors in parallel
-    for (int i = 0; i < ParallelResistorCount; i++)
-    {
-        std::cout << "\nEnter the value of R-parallel-" << i + 1 << ": ";
-        std::cin >> userInput;
 
-        if (std::cin.fail())
-        {
-            std::cout << "Invalid value entered. Please enter a valid number.\n";
-            i--;
-        }
-
-        parallelSum += (1 / userInput);
-    }
-
-    TheveninResistance = SeriesSum + (1 / parallelSum);
-
-    std::cout << "The Thevenin Resistance: " << TheveninResistance << " Ohms." << std::endl;
-    return TheveninResistance;

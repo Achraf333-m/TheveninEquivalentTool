@@ -1,0 +1,40 @@
+Thevenin Circuits Log
+
+
+
+
+Problem #1
+
+********Circuit number 1********
+
+Thevenin Voltage: 4 V.
+Thevenin Resistance: 2.5 Ohms.
+Load Resistance: 7 Ohms.
+Power Supplied to Load: 1.241 W.
+Maximum Possible Power to Load: 1.6 W.
+Load's Power Absorption Rating: 77.5623.
+
+Comments: Load resistance is sub-optimal, adjust it to match the Thevenin Resistance.
+********************
+
+
+Thevenin Circuits Log
+
+
+
+
+Problem #2
+
+********Circuit number 1********
+
+Thevenin Voltage: 12 V.
+Thevenin Resistance: 2.91667 Ohms.
+Load Resistance: 7 Ohms.
+Power Supplied to Load: 10.2501 W.
+Maximum Possible Power to Load: 12.3429 W.
+Load's Power Absorption Rating: 83.045.
+
+Comments: Load resistance is sub-optimal, adjust it to match the Thevenin Resistance.
+********************
+
+

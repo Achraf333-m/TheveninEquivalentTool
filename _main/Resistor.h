@@ -21,7 +21,7 @@ public:
     // Parallel Resistance
     Resistor operator||(const Resistor& other);
 
-    ~Resistor();
+    ~Resistor() {};
 };
 
 #endif
