@@ -1,6 +1,7 @@
 #include "TheveninEquivalent.h"
 #include <iostream>
 #include <string>
+#include <limits>
 
 void welcome(const TheveninEquivalent& TE);
 
@@ -16,6 +17,11 @@ int main()
     TE.ShowEquivalentCircuit();
     TE.suggestions();
     TE.writeToFile();
+
+    std::cout << "\n\nPress ENTER to exit program..";
+    // ignoring newlines, to ensure program waits for user to hit enter before it exits.
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.get();
 
     return 0;
 }

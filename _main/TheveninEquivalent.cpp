@@ -199,14 +199,19 @@ void TheveninEquivalent::writeToPath(std::string& path) {
 
 std::string getDesktopPath() {
     #ifdef _WIN32
+    char* onedrive = std::getenv("ONEDRIVE");
         char* userProfile = std::getenv("USERPROFILE");
-        if (userProfile) {
+        if (onedrive) {
+            return std::string(onedrive) + "\\Desktop\\TheveninEquivalentLogs.txt";
+        }
+        else if (userProfile) {
             return std::string(userProfile) + "\\Desktop\\TheveninEquivalentLogs.txt";
         } else {
             throw std::runtime_error("Error writing into file. Try running in the repo folder (clone)");
         }
     #else 
         char* home = std::getenv("HOME");
+
         if (home) {
             return std::string(home) + "/Desktop/TheveninEquivalentLogs.txt";
         } else {
@@ -214,7 +219,6 @@ std::string getDesktopPath() {
         }
 
     #endif 
-        return "TheveninEquivalentLogs.txt";
 }
 
 
