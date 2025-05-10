@@ -1,16 +1,14 @@
 *********************************************************EXERCISE PROBLEMS**************************************************
 
 
-
-
 Problem #1
 
-Thevenin Voltage: 5 V.
-Thevenin Resistance: 2.91667 Ohms.
+Thevenin Voltage: 6 V.
+Thevenin Resistance: 3.75 Ohms.
 Load Resistance: 7 Ohms.
-Power Supplied to Load: 1.77954 W.
-Maximum Possible Power to Load: 2.14286 W.
-Load's Power Absorption Rating: 83.045.
+Power Supplied to Load: 2.18064 W.
+Maximum Possible Power to Load: 2.4 W.
+Load's Power Absorption Rating: 90.8599.
 
 Comments: Load resistance is sub-optimal, adjust it to match the Thevenin Resistance.
 ********************
@@ -20,12 +18,12 @@ Comments: Load resistance is sub-optimal, adjust it to match the Thevenin Resist
 
 Problem #2
 
-Thevenin Voltage: 8 V.
-Thevenin Resistance: 3.9375 Ohms.
-Load Resistance: 3.94 Ohms.
-Power Supplied to Load: 4.06349 W.
-Maximum Possible Power to Load: 4.06349 W.
-Load's Power Absorption Rating: 100.
+Thevenin Voltage: 5 V.
+Thevenin Resistance: 2.91667 Ohms.
+Load Resistance: 3 Ohms.
+Power Supplied to Load: 2.14243 W.
+Maximum Possible Power to Load: 2.14286 W.
+Load's Power Absorption Rating: 99.9802.
 
 Comments: Load resistance is almost optimal, no further improvements are needed.
 ********************

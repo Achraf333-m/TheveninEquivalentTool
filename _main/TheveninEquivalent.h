@@ -35,6 +35,7 @@ public:
     void suggestions();
     void ShowEquivalentCircuit();
     void writeToFile();
+    void writeToPath(std::string&);
 
     ~TheveninEquivalent() {};
 };

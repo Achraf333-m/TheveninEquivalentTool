@@ -2,10 +2,13 @@
 #include "TheveninEquivalent.h"
 #include <sstream>
 #include <fstream>
+#include <filesystem>
 #include <string>
 #include <limits>
 #include <iomanip>
 #include "InputParser.h"
+
+namespace fs = std::filesystem;
 
 // constructors
 TheveninEquivalent::TheveninEquivalent() : loadResistance(0.0), branchCurrent(0.0), TheveninVoltage(0.0), TheveninResistance(0.0), ProblemNumber(0) {}
@@ -170,25 +173,64 @@ void TheveninEquivalent::ShowEquivalentCircuit()
     std::cout << diagram.str();
 }
 
+
+// writing into file
+// finding whether user is in the repo or running the .exe file directly from downloads.
+
+void TheveninEquivalent::writeToPath(std::string& path) {
+    std::ofstream circuits(path, std::ios::app);
+    if (!circuits.is_open())
+        {
+            std::cerr << "Error opening file for writing! Please try again." << std::endl;
+        }
+    double rating = (CalculatePowerSuppliedToLoad() / ((TheveninVoltage * TheveninVoltage) / (4 * TheveninResistance))) * 100;
+        std::cout << std::fixed << std::setprecision(2);
+        circuits << "\n\nProblem #" << ProblemNumber << "\n\n";
+        circuits << "Thevenin Voltage: " << TheveninVoltage << " V.\n";
+        circuits << "Thevenin Resistance: " << TheveninResistance << " Ohms.\n";
+        circuits << "Load Resistance: " << loadResistance << " Ohms.\n";
+        circuits << "Power Supplied to Load: " << CalculatePowerSuppliedToLoad() << " W.\n";
+        circuits << "Maximum Possible Power to Load: " << (TheveninVoltage * TheveninVoltage) / (4 * TheveninResistance) << " W.\n";
+        circuits << "Load's Power Absorption Rating: " << rating << ".\n\n";
+        circuits << "Comments: " << (rating < 98 ? "Load resistance is sub-optimal, adjust it to match the Thevenin Resistance." : "Load resistance is almost optimal, no further improvements are needed.") << std::endl;
+        circuits << "********************\n\n\n";
+        std::cout << "\n\n[DONE!] Saved to file: " << path << std::endl;
+}
+
+std::string getDesktopPath() {
+    #ifdef _WIN32
+        char* userProfile = std::getenv("USERPROFILE");
+        if (userProfile) {
+            return std::string(userProfile) + "\\Desktop\\TheveninEquivalentLogs.txt";
+        } else {
+            throw std::runtime_error("Error writing into file. Try running in the repo folder (clone)");
+        }
+    #else 
+        char* home = std::getenv("HOME");
+        if (home) {
+            return std::string(home) + "/Desktop/TheveninEquivalentLogs.txt";
+        } else {
+            throw std::runtime_error("Error writing into file. Try running in the repo folder (clone)");
+        }
+
+    #endif 
+        return "TheveninEquivalentLogs.txt";
+}
+
+
 void TheveninEquivalent::writeToFile()
 {
-    std::ofstream circuits("circuits.txt", std::ios::app);
+    // here I am making sure I am in repo (assuming a user cloned it)
+    if (fs::exists("circuits.txt")) {
+        std::string repo_path = "circuits.txt";
+        writeToPath(repo_path);
+    } else {
+        try {
+            std::string desktop_path = getDesktopPath();
+            writeToPath(desktop_path);
+        } catch (const std::runtime_error& e) {
+            std::cout << "\n[ERROR] " << e.what();
+        }
 
-    if (!circuits.is_open())
-    {
-        std::cerr << "Error opening file for writing! Please try again." << std::endl;
     }
-
-    double rating = (CalculatePowerSuppliedToLoad() / ((TheveninVoltage * TheveninVoltage) / (4 * TheveninResistance))) * 100;
-    std::cout << std::fixed << std::setprecision(2);
-    circuits << "\n\nProblem #" << ProblemNumber << "\n\n";
-    circuits << "Thevenin Voltage: " << TheveninVoltage << " V.\n";
-    circuits << "Thevenin Resistance: " << TheveninResistance << " Ohms.\n";
-    circuits << "Load Resistance: " << loadResistance << " Ohms.\n";
-    circuits << "Power Supplied to Load: " << CalculatePowerSuppliedToLoad() << " W.\n";
-    circuits << "Maximum Possible Power to Load: " << (TheveninVoltage * TheveninVoltage) / (4 * TheveninResistance) << " W.\n";
-    circuits << "Load's Power Absorption Rating: " << rating << ".\n\n";
-    circuits << "Comments: " << (rating < 98 ? "Load resistance is sub-optimal, adjust it to match the Thevenin Resistance." : "Load resistance is almost optimal, no further improvements are needed.") << std::endl;
-    circuits << "********************\n\n\n";
-    std::cout << "\nSaved to 'circuits.txt' file!" << std::endl;
 }
