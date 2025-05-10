@@ -12,7 +12,10 @@ This project reflects key topics from both circuit theory and programming, inclu
 - Inheritance and operator overloading
 - File and exception handling
 
+#using the tool
 
+This tool can be used as a CLI app by downloading the executable file (TheveninEquivalent.exe) and running it directly. It can also be used inside the repository, by using git clone in your personal development environment.
+note: this tool does not use Windows API, so downloading the executable and running it can lead to error if your Desktop path is not directly under "Users\\[username]" for windows and "Home/" for linux.
 ---
 
 ### Validating the Tool
