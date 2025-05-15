@@ -27,7 +27,7 @@ int main()
 }
 
 void welcome(const TheveninEquivalent& TE) {
-    std::cout << "THEVENIN EQUIVALENCE: PROBLEM #" << TE.getProblemNumber() << "inro\n\n";
+    std::cout << "THEVENIN EQUIVALENCE: PROBLEM #" << TE.getProblemNumber() << "\n\n";
     std::cout << "\n\n"
               << "********** WELCOME TO YOUR FAVORITE TOOL: THE THEVENIN EQUIVALENT CIRCUIT FINDER **********"
               << "\n\n"
